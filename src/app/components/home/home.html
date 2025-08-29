@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">🎬 Cartelera de Películas</h2>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p>Cargando cartelera...</p>
+  </div>
+
+  <!-- Grid de películas -->
+  <div class="row" *ngIf="!loading">
+    <div class="col-md-4 mb-4" *ngFor="let peli of peliculas">
+      <div class="card h-100 shadow-sm">
+        <img [src]="peli.Poster" class="card-img-top" alt="Imagen de {{peli.Title}}" *ngIf="peli.Poster">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ peli.Title }}</h5>
+          <p class="card-text"><strong>Año:</strong> {{ peli.Year }}</p>
+          <p class="card-text"><strong>Género:</strong> {{ peli.Type }}</p>
+          <p class="card-text"><strong>Cine:</strong> {{ peli.Ubication }}</p>
+          <p class="card-text">{{ peli.description }}</p>
+          <span class="badge mt-2" 
+                [ngClass]="peli.Estado ? 'bg-success' : 'bg-danger'">
+            {{ peli.Estado ? 'Disponible' : 'No Disponible' }}
+          </span>
+          <button class="btn btn-primary mt-auto">Ver Detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
