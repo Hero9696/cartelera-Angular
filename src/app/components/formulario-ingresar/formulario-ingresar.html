@@ -1,1 +1,78 @@
-<p>formulario-ingresar works!</p>
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="card shadow-lg rounded-4 p-4">
+    <div class="card-header bg-primary text-white text-center rounded-top-4">
+      <h2 class="mb-0">
+        {{ modoActualizar ? 'Actualizar Película' : 'Ingresar Nueva Película' }}
+      </h2>
+    </div>
+
+    <div class="card-body">
+      <form (ngSubmit)="guardar()" #peliculaForm="ngForm">
+        <div class="row g-3">
+          <!-- IMDB ID -->
+          <div class="col-md-6">
+            <label for="imdbID" class="form-label fw-bold">IMDB ID</label>
+            <input type="text" id="imdbID" class="form-control" [(ngModel)]="pelicula.imdbID" name="imdbID" required [readonly]="modoActualizar">
+          </div>
+
+          <!-- Título -->
+          <div class="col-md-6">
+            <label for="Title" class="form-label fw-bold">Título</label>
+            <input type="text" id="Title" class="form-control" [(ngModel)]="pelicula.Title" name="Title" required>
+          </div>
+
+          <!-- Año -->
+          <div class="col-md-6">
+            <label for="Year" class="form-label fw-bold">Año</label>
+            <input type="text" id="Year" class="form-control" [(ngModel)]="pelicula.Year" name="Year" required>
+          </div>
+
+          <!-- Género -->
+          <div class="col-md-6">
+            <label for="Type" class="form-label fw-bold">Género</label>
+            <input type="text" id="Type" class="form-control" [(ngModel)]="pelicula.Type" name="Type">
+          </div>
+
+          <!-- URL Poster -->
+          <div class="col-12">
+            <label for="Poster" class="form-label fw-bold">URL Poster</label>
+            <input type="text" id="Poster" class="form-control" [(ngModel)]="pelicula.Poster" name="Poster">
+          </div>
+
+          <!-- Disponible -->
+          <div class="col-12 form-check">
+            <input type="checkbox" id="Estado" class="form-check-input" [(ngModel)]="pelicula.Estado" name="Estado">
+            <label for="Estado" class="form-check-label fw-bold">Disponible</label>
+          </div>
+
+          <!-- Descripción -->
+          <div class="col-12">
+            <label for="description" class="form-label fw-bold">Descripción</label>
+            <textarea id="description" class="form-control" rows="3" [(ngModel)]="pelicula.description" name="description"></textarea>
+          </div>
+
+          <!-- Ubicación -->
+          <div class="col-12">
+            <label for="Ubication" class="form-label fw-bold">Ubicación</label>
+            <input type="text" id="Ubication" class="form-control" [(ngModel)]="pelicula.Ubication" name="Ubication">
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="mt-4 d-flex justify-content-end">
+          <button type="submit" class="btn btn-success me-2" [disabled]="loading">
+            {{ modoActualizar ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="resetForm()">Limpiar</button>
+        </div>
+      </form>
+
+      <!-- Mensaje -->
+      <div *ngIf="mensaje" class="alert alert-info mt-4 text-center fw-bold">
+        {{ mensaje }}
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

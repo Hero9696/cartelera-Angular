@@ -4,15 +4,16 @@ import { Pelicula } from '../../models/pelicula';
 import { CommonModule } from '@angular/common'; 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Navbar } from "../navbar/navbar";
+import { Footer } from "../footer/footer";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, Navbar, Footer],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-
 export class Home {
   peliculas: Pelicula[] = [];
   loading = false;
@@ -23,8 +24,7 @@ export class Home {
   };
 
   constructor(private carteleraService: CarteleraService) {
-    // Cargar la cartelera al crear el componente
-    this.getCartelera();
+    this.getCartelera(); // carga inicial de películas
   }
 
   getCartelera(): void {
@@ -42,7 +42,9 @@ export class Home {
     });
   }
 
-  buscar(): void {
-    this.getCartelera();
+  // Nuevo método que recibe los filtros emitidos por el navbar
+  buscar(filtros: { title: string; ubication: string }): void {
+    this.filtros = filtros; // actualiza los filtros
+    this.getCartelera();    // realiza la búsqueda con los filtros
   }
 }

@@ -7,16 +7,23 @@ import { Pelicula } from '../models/pelicula';
   providedIn: 'root'
 })
 export class CarteleraService {
-  private apiUrl = 'https://movie.azurewebsites.net/api/cartelera?title=&ubication=';
+  private apiUrl = 'https://movie.azurewebsites.net/api/cartelera';
 
   constructor(private http: HttpClient) {}
 
   getCartelera(): Observable<Pelicula[]> {
-    return this.http.get<Pelicula[]>(this.apiUrl);
+    return this.http.get<Pelicula[]>(`${this.apiUrl}?title=&ubication=`);
   }
 
-  // Nuevo método para URL personalizada
   getCarteleraPorUrl(url: string): Observable<Pelicula[]> {
     return this.http.get<Pelicula[]>(url);
+  }
+
+  createPelicula(pelicula: Pelicula): Observable<Pelicula> {
+    return this.http.post<Pelicula>(this.apiUrl, pelicula);
+  }
+
+  updatePelicula(imdbID: string, pelicula: Pelicula): Observable<Pelicula> {
+    return this.http.put<Pelicula>(`${this.apiUrl}?imdbID=${imdbID}`, pelicula);
   }
 }
