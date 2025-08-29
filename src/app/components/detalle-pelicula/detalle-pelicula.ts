@@ -53,11 +53,45 @@ loadPelicula() {
   }
 }
 
+actualizar() {
+  if (this.pelicula && this.pelicula.imdbID) {
+    this.carteleraService.updatePelicula(this.pelicula.imdbID, this.pelicula)
+      .subscribe({
+        next: (res) => {
+          console.log('Película actualizada:', res);
+          this.pelicula = res; // actualiza localmente los cambios
+          this.cerrarModal();
+        },
+        error: (err) => {
+          console.error('Error al actualizar:', err);
+        }
+      });
+  }
+}
+
+eliminar() {
+  if (this.pelicula && this.pelicula.imdbID) {
+    this.carteleraService.deletePelicula(this.pelicula.imdbID)
+      .subscribe({
+        next: () => {
+          console.log('Película eliminada');
+          this.cerrarModal();
+          this.router.navigate(['/']); // vuelve al inicio
+        },
+        error: (err) => {
+          console.error('Error al eliminar:', err);
+        }
+      });
+  }
+}
+
+
+
+
 
   abrirModalActualizar() { this.mostrarModalActualizar = true; }
   abrirModalEliminar() { this.mostrarModalEliminar = true; }
   cerrarModal() { this.mostrarModalActualizar = false; this.mostrarModalEliminar = false; }
 
-  actualizar() { console.log('Actualizar:', this.pelicula); this.cerrarModal(); }
-  eliminar() { console.log('Eliminar:', this.pelicula); this.router.navigate(['/']); this.cerrarModal(); }
+  
 }

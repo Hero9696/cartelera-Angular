@@ -31,4 +31,8 @@ getPeliculaById(id: string) {
   const url = `https://movie.azurewebsites.net/api/cartelera?imdbID=${id}`;
   return this.http.get<Pelicula>(url); // retorna un objeto directamente
 }
+
+deletePelicula(imdbID: string): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}?imdbID=${imdbID}`);
+}
 }
