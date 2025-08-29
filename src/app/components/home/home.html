@@ -1,3 +1,22 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">🎬 Cartelera</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSearch">
+      <form class="d-flex ms-auto" (ngSubmit)="buscar()">
+        <input class="form-control me-2" type="search" placeholder="Título" aria-label="Título" [(ngModel)]="filtros.title" name="title">
+        <input class="form-control me-2" type="search" placeholder="Ubicación" aria-label="Ubicación" [(ngModel)]="filtros.ubication" name="ubication">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenido principal -->
 <div class="container mt-4">
   <h2 class="mb-4 text-center">🎬 Cartelera de Películas</h2>
 
@@ -8,7 +27,7 @@
   </div>
 
   <!-- Grid de películas -->
-  <div class="row" *ngIf="!loading">
+  <div class="row" *ngIf="!loading && peliculas.length > 0">
     <div class="col-md-4 mb-4" *ngFor="let peli of peliculas">
       <div class="card h-100 shadow-sm">
         <img [src]="peli.Poster" class="card-img-top" alt="Imagen de {{peli.Title}}" *ngIf="peli.Poster">
@@ -27,4 +46,13 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="!loading && peliculas.length === 0" class="text-center">
+    <p>No se encontraron películas con esos filtros.</p>
+  </div>
 </div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-4">
+  © 2025 Cartelera de Películas - Hecho Por Miguel Angel Padilla Morales
+</footer>

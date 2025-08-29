@@ -3,30 +3,46 @@ import { CarteleraService } from '../../services/cartelera';
 import { Pelicula } from '../../models/pelicula';
 import { CommonModule } from '@angular/common'; 
 import { HttpClientModule } from '@angular/common/http';
-import { Cartelera } from '../cartelera/cartelera';
+import { FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, Cartelera],
+  imports: [CommonModule, HttpClientModule, FormsModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
 
 export class Home {
   peliculas: Pelicula[] = [];
-  loading: boolean = true;
+  loading = false;
+
+  filtros = {
+    title: '',
+    ubication: ''
+  };
 
   constructor(private carteleraService: CarteleraService) {
-    // Llamamos la API directamente desde el constructor
-    this.carteleraService.getCartelera().subscribe({
+    // Cargar la cartelera al crear el componente
+    this.getCartelera();
+  }
+
+  getCartelera(): void {
+    this.loading = true;
+    const url = `https://movie.azurewebsites.net/api/cartelera?title=${this.filtros.title}&ubication=${this.filtros.ubication}`;
+    this.carteleraService.getCarteleraPorUrl(url).subscribe({
       next: (data) => {
         this.peliculas = data;
         this.loading = false;
       },
       error: (err) => {
-        console.error('Error al cargar cartelera', err);
+        console.error(err);
         this.loading = false;
       }
     });
+  }
+
+  buscar(): void {
+    this.getCartelera();
   }
 }

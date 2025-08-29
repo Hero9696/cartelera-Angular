@@ -14,4 +14,9 @@ export class CarteleraService {
   getCartelera(): Observable<Pelicula[]> {
     return this.http.get<Pelicula[]>(this.apiUrl);
   }
+
+  // Nuevo método para URL personalizada
+  getCarteleraPorUrl(url: string): Observable<Pelicula[]> {
+    return this.http.get<Pelicula[]>(url);
+  }
 }
