@@ -1,9 +1,10 @@
 <app-navbar [mostrarBusqueda]="true" (buscarEvent)="buscar($event)"></app-navbar>
 
-
-
 <!-- Contenido principal -->
-<div class="container mt-4">
+<div class="container mt-4" style="background-color: var(--cinema-bg); min-height: 100vh; padding-bottom: 2rem;">
+
+  
+
   <h2 class="mb-4 text-center">🎬 Cartelera de Películas</h2>
 
   <!-- Loader -->
@@ -13,29 +14,36 @@
   </div>
 
   <!-- Grid de películas -->
-  <div class="row" *ngIf="!loading && peliculas.length > 0">
-    <div class="col-md-4 mb-4" *ngFor="let peli of peliculas">
-      <div class="card h-100 shadow-sm">
-        <img [src]="peli.Poster" class="card-img-top" alt="Imagen de {{peli.Title}}" *ngIf="peli.Poster">
+  <div class="row" *ngIf="!loading && peliculas?.length">
+    <div class="col-md-4 mb-4" *ngFor="let peli of peliculas || []">
+      <div class="card h-100 shadow-lg movie-card">
+        <img [src]="peli?.Poster" class="card-img-top movie-img" alt="Imagen de {{peli?.Title}}" *ngIf="peli?.Poster">
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ peli.Title }}</h5>
-          <p class="card-text"><strong>Año:</strong> {{ peli.Year }}</p>
-          <p class="card-text"><strong>Género:</strong> {{ peli.Type }}</p>
-          <p class="card-text"><strong>Cine:</strong> {{ peli.Ubication }}</p>
-          <p class="card-text">{{ peli.description }}</p>
-          <span class="badge mt-2" 
-                [ngClass]="peli.Estado ? 'bg-success' : 'bg-danger'">
-            {{ peli.Estado ? 'Disponible' : 'No Disponible' }}
-          </span>
-        <button class="btn btn-primary mt-auto" [routerLink]="['/detalle', peli.imdbID]" (click)="verDetalle(peli.imdbID)">Ver Detalles</button>
+          <h5 class="card-title">{{ peli?.Title || 'Sin título' }}</h5>
+          <p class="card-text"><strong>Año:</strong> {{ peli?.Year || 'N/A' }}</p>
+          <p class="card-text"><strong>Género:</strong> {{ peli?.Type || 'N/A' }}</p>
+          <p class="card-text"><strong>Cine:</strong> {{ peli?.Ubication || 'N/A' }}</p>
+          
+          <!-- Descripción limitada -->
+          <p class="card-text">
+            {{ peli?.description ? (peli.description | slice:0:100) : 'Sin descripción' }}
+            {{ (peli?.description?.length ?? 0) > 100 ? '...' : '' }}
+          </p>
 
-
+          <div class="d-flex justify-content-between align-items-center mt-auto">
+            <span class="badge" [ngClass]="peli?.Estado ? 'badge-available' : 'badge-unavailable'">
+              {{ peli?.Estado ? 'Disponible' : 'No Disponible' }}
+            </span>
+            <button class="btn btn-sm btn-cinema" [routerLink]="['/detalle', peli?.imdbID || '']" (click)="verDetalle(peli?.imdbID || '')">
+              Ver Detalles
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="!loading && peliculas.length === 0" class="text-center">
+  <div *ngIf="!loading && (!peliculas || peliculas.length === 0)" class="text-center">
     <p>No se encontraron películas con esos filtros.</p>
   </div>
 </div>

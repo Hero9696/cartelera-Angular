@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --cinema-primary: #3b3f58;       /* azul oscuro neutro para títulos */
+  --cinema-secondary: #5a6178;     /* gris azulado para detalles */
+  --cinema-accent: #d9985e;        /* naranja suave para botones/acento */
+  --cinema-bg: #f4f4f7;            /* fondo neutro muy claro */
+  --cinema-card: #e3e5eb;          /* fondo de cards */
+  --cinema-text: #2c2f3b;          /* texto principal oscuro */
+  --cinema-text-light: #555c6e;    /* texto secundario */
+  --cinema-badge-available: #7dbf9e;   /* verde apagado */
+  --cinema-badge-unavailable: #d07b7b; /* rojo apagado */
+
+  /* Nuevos colores que no opaquen el texto */
+  --cinema-gradient1: #f4f4f7;   /* gris muy claro, fondo base */
+  --cinema-gradient2: #dfe1e8;   /* gris suave, contraste sutil con fondo */
+  --cinema-gradient3: #c1c4d6;   /* gris azulado suave, añade profundidad */
+}
+
+body {
+  color: var(--cinema-text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  /* Gradiente suave usando los 3 nuevos colores */
+  background: linear-gradient(270deg, var(--cinema-gradient1), var(--cinema-gradient2), var(--cinema-gradient3));
+  background-size: 600% 600%;
+  animation: gradientMove 20s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

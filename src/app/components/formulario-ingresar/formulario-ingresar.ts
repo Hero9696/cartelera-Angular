@@ -34,7 +34,7 @@ export class FormularioIngresar {
   guardar(): void {
     this.loading = true;
     if (this.modoActualizar) {
-      this.carteleraService.updatePelicula(this.pelicula.imdbID, this.pelicula)
+      this.carteleraService.updatePelicula(this.pelicula.imdbID ? this.pelicula.imdbID : '', this.pelicula)
         .subscribe({
           next: () => {
             this.mensaje = 'Película actualizada correctamente';

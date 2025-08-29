@@ -1,0 +1,12 @@
+:root {
+  /* Paleta tipo Cinépolis en pastel */
+  --cinema-primary: #cfa6f0; /* morado pastel */
+  --cinema-secondary: #f8b4c4; /* rosa pastel */
+  --cinema-accent: #ffd6a5; /* naranja pastel */
+  --cinema-bg: #fdf7ff; /* fondo muy suave */
+  --cinema-card: #fff0f7; /* fondo de cards */
+  --cinema-text: #4a3f55; /* texto principal oscuro suave */
+  --cinema-text-light: #7a6b8c; /* texto secundario */
+  --cinema-badge-available: #a6f0c3; /* verde pastel */
+  --cinema-badge-unavailable: #f0a6a6; /* rojo pastel */
+}

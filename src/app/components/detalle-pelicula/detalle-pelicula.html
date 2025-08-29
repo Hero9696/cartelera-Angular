@@ -12,9 +12,10 @@
       <p><strong>Género:</strong> {{ pelicula.Type }}</p>
       <p><strong>Cine:</strong> {{ pelicula.Ubication }}</p>
       <p>{{ pelicula.description }}</p>
-      <span class="badge mt-2" [ngClass]="pelicula.Estado ? 'bg-success' : 'bg-danger'">
+     
+      <p class="badge mt-2" [ngClass]="pelicula.Estado ? 'bg-success' : 'bg-danger'">
         {{ pelicula.Estado ? 'Disponible' : 'No Disponible' }}
-      </span>
+      </p>
 
       <div class="mt-4">
         <button class="btn btn-warning me-2" (click)="abrirModalActualizar()">Actualizar</button>
@@ -33,20 +34,23 @@
 <!-- Modal Actualizar -->
 <div *ngIf="mostrarModalActualizar && pelicula" 
      class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-2"
-     style="background: rgba(0,0,0,0.5); z-index:1050;">
+     style="background: rgba(0,0,0,0.6); z-index:1050;">
 
   <div class="modal-dialog modal-dialog-centered modal-xl w-100" style="max-width: 900px;">
-    <div class="modal-content shadow-lg rounded-3" style="background-color: #ffffff;">
-      <div class="modal-header bg-primary text-white rounded-top">
-        <h5 class="modal-title">Actualizar Película</h5>
+    <div class="modal-content shadow-lg rounded-4" style="background-color: var(--cinema-card); color: var(--cinema-text);">
+      
+      <!-- HEADER -->
+      <div class="modal-header" style="background-color: var(--cinema-primary); color: #fff; border-radius: 12px 12px 0 0;">
+        <h5 class="modal-title fw-bold">Actualizar Película</h5>
         <button type="button" class="btn-close btn-close-white" (click)="cerrarModal()"></button>
       </div>
 
+      <!-- BODY -->
       <div class="modal-body">
         <form #formActualizar="ngForm" class="row g-3">
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold">Título</label>
-            <input type="text" class="form-control form-control-lg" [(ngModel)]="pelicula.Title" name="title" placeholder="Ingrese el título">
+            <input type="text" class="form-control form-control-lg" [(ngModel)]="pelicula.Title" name="title">
           </div>
 
           <div class="col-12 col-md-6">
@@ -56,7 +60,7 @@
 
           <div class="col-12">
             <label class="form-label fw-bold">Descripción</label>
-            <textarea class="form-control form-control-lg" [(ngModel)]="pelicula.description" name="description" rows="4" placeholder="Ingrese la descripción"></textarea>
+            <textarea class="form-control form-control-lg" [(ngModel)]="pelicula.description" name="description" rows="4"></textarea>
           </div>
 
           <div class="col-12 col-md-6">
@@ -79,18 +83,22 @@
 
           <div class="col-12 col-md-6">
             <label class="form-label fw-bold">URL del Poster</label>
-            <input type="text" class="form-control form-control-lg" [(ngModel)]="pelicula.Poster" name="poster" placeholder="Ingrese la URL del poster">
+            <input type="text" class="form-control form-control-lg" [(ngModel)]="pelicula.Poster" name="poster">
           </div>
         </form>
       </div>
 
+      <!-- FOOTER -->
       <div class="modal-footer justify-content-center gap-3">
-        <button class="btn btn-secondary px-4" (click)="cerrarModal()">Cancelar</button>
-        <button class="btn btn-success px-4" (click)="actualizar()">Guardar</button>
+        <button class="btn btn-outline-secondary px-4 fw-bold" (click)="cerrarModal()">Cancelar</button>
+        <button class="btn btn-success px-4 fw-bold shadow" style="background-color: var(--cinema-success); border-color: var(--cinema-success);" (click)="actualizar()">
+          Guardar
+        </button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 

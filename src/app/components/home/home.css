@@ -1,0 +1,71 @@
+
+    :root {
+      --cinema-primary: #cfa6f0; /* morado pastel */
+      --cinema-secondary: #f8b4c4; /* rosa pastel */
+      --cinema-accent: #ffd6a5; /* naranja pastel */
+      --cinema-bg: #fdf7ff; /* fondo muy suave */
+      --cinema-card: #fff0f7; /* fondo de cards */
+      --cinema-text: #4a3f55; /* texto principal oscuro suave */
+      --cinema-text-light: #7a6b8c; /* texto secundario */
+      --cinema-badge-available: #a6f0c3; /* verde pastel */
+      --cinema-badge-unavailable: #f0a6a6; /* rojo pastel */
+    }
+
+    .movie-card {
+      background-color: var(--cinema-card);
+      color: var(--cinema-text);
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .movie-card .card-title {
+      color: var(--cinema-primary);
+      font-weight: 600;
+    }
+
+    .movie-card .card-text {
+      color: var(--cinema-text-light);
+    }
+
+    .movie-card img {
+      border-bottom: 3px solid var(--cinema-secondary);
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      object-fit: cover;
+      height: 300px;
+    }
+
+    .btn-cinema {
+      background-color: var(--cinema-accent);
+      border-color: var(--cinema-accent);
+      color: var(--cinema-text);
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cinema:hover {
+      background-color: var(--cinema-secondary);
+      border-color: var(--cinema-secondary);
+      color: var(--cinema-text);
+    }
+
+    .badge-available {
+      background-color: var(--cinema-badge-available);
+      color: var(--cinema-text);
+    }
+
+    .badge-unavailable {
+      background-color: var(--cinema-badge-unavailable);
+      color: var(--cinema-text);
+    }
+
+    h2 {
+      color: var(--cinema-primary);
+      font-weight: 700;
+    }
+ 

@@ -1,0 +1,73 @@
+
+
+
+  body {
+    background-color: var(--cinema-bg);
+    color: var(--cinema-text);
+  }
+
+  .card {
+    background-color: var(--cinema-card);
+    color: var(--cinema-text);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  }
+
+  .card-header {
+    background-color: var(--cinema-primary);
+    color: white;
+    font-weight: 600;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+  }
+
+  .form-label {
+    color: var(--cinema-text);
+  }
+
+  .form-control {
+    border-radius: 8px;
+    border: 1px solid var(--cinema-secondary);
+    background-color: #fff;
+    color: var(--cinema-text);
+  }
+
+  .form-control:focus {
+    border-color: var(--cinema-accent);
+    box-shadow: 0 0 0 0.2rem rgba(217, 152, 94, 0.25);
+  }
+
+  .btn-success {
+    background-color: var(--cinema-btn);
+    border-color: var(--cinema-btn);
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+
+  .btn-success:hover {
+    background-color: var(--cinema-btn-hover);
+    border-color: var(--cinema-btn-hover);
+  }
+
+  .btn-outline-secondary {
+    border-color: var(--cinema-secondary);
+    color: var(--cinema-secondary);
+    transition: all 0.3s;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: var(--cinema-secondary);
+    color: #fff;
+  }
+
+  .alert-info {
+    background-color: var(--cinema-primary);
+    color: #fff;
+    border: none;
+  }
+
+  h2 {
+    font-weight: 700;
+  }
