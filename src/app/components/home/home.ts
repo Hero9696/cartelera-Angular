@@ -6,11 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Navbar } from "../navbar/navbar";
 import { Footer } from "../footer/footer";
+import { Router, RouterModule } from '@angular/router'; // <-- importar Router
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, FormsModule, Navbar, Footer],
+  imports: [CommonModule, HttpClientModule, FormsModule, Navbar, Footer, RouterModule],
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
@@ -23,7 +24,8 @@ export class Home {
     ubication: ''
   };
 
-  constructor(private carteleraService: CarteleraService) {
+  constructor(private carteleraService: CarteleraService,
+              private router: Router) { // <-- inyectar Router
     this.getCartelera(); // carga inicial de películas
   }
 
@@ -42,9 +44,14 @@ export class Home {
     });
   }
 
-  // Nuevo método que recibe los filtros emitidos por el navbar
   buscar(filtros: { title: string; ubication: string }): void {
-    this.filtros = filtros; // actualiza los filtros
-    this.getCartelera();    // realiza la búsqueda con los filtros
+    this.filtros = filtros;
+    this.getCartelera();
+  }
+
+  // <-- Poner este método dentro de la clase Home
+  verDetalle(id: string) {
+    console.log('ID de la película:', id);
+    this.router.navigate(['/detalle', id]);
   }
 }

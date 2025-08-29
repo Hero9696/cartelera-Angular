@@ -27,7 +27,9 @@
                 [ngClass]="peli.Estado ? 'bg-success' : 'bg-danger'">
             {{ peli.Estado ? 'Disponible' : 'No Disponible' }}
           </span>
-          <button class="btn btn-primary mt-auto">Ver Detalles</button>
+        <button class="btn btn-primary mt-auto" [routerLink]="['/detalle', peli.imdbID]" (click)="verDetalle(peli.imdbID)">Ver Detalles</button>
+
+
         </div>
       </div>
     </div>

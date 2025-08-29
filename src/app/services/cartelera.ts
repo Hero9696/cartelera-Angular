@@ -26,4 +26,9 @@ export class CarteleraService {
   updatePelicula(imdbID: string, pelicula: Pelicula): Observable<Pelicula> {
     return this.http.put<Pelicula>(`${this.apiUrl}?imdbID=${imdbID}`, pelicula);
   }
+
+getPeliculaById(id: string) {
+  const url = `https://movie.azurewebsites.net/api/cartelera?imdbID=${id}`;
+  return this.http.get<Pelicula>(url); // retorna un objeto directamente
+}
 }

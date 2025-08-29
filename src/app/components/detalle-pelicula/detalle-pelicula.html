@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4" *ngIf="!loading && pelicula; else noPelicula">
+  <h2 class="mb-4">{{ pelicula.Title }}</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <img [src]="pelicula.Poster" class="img-fluid" alt="Poster de {{pelicula.Title}}">
+    </div>
+    <div class="col-md-8">
+      <p><strong>Año:</strong> {{ pelicula.Year }}</p>
+      <p><strong>Género:</strong> {{ pelicula.Type }}</p>
+      <p><strong>Cine:</strong> {{ pelicula.Ubication }}</p>
+      <p>{{ pelicula.description }}</p>
+      <span class="badge mt-2" [ngClass]="pelicula.Estado ? 'bg-success' : 'bg-danger'">
+        {{ pelicula.Estado ? 'Disponible' : 'No Disponible' }}
+      </span>
+
+      <div class="mt-4">
+        <button class="btn btn-warning me-2" (click)="abrirModalActualizar()">Actualizar</button>
+        <button class="btn btn-danger" (click)="abrirModalEliminar()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noPelicula>
+  <div class="text-center">
+    <p>Película no encontrada.</p>
+  </div>
+</ng-template>
+
+<!-- Modal Actualizar -->
+<div *ngIf="mostrarModalActualizar && pelicula">
+  <div class="modal fade show d-block" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Actualizar Película</h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form #formActualizar="ngForm">
+            <div class="mb-3">
+              <label class="form-label">Título</label>
+              <input type="text" class="form-control" [(ngModel)]="pelicula.Title" name="title">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descripción</label>
+              <textarea class="form-control" [(ngModel)]="pelicula.description" name="description"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+          <button class="btn btn-primary" (click)="actualizar()">Guardar</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show" (click)="cerrarModal()"></div>
+  </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div *ngIf="mostrarModalEliminar && pelicula">
+  <div class="modal fade show d-block" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Eliminar Película</h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Seguro que deseas eliminar <strong>{{pelicula.Title}}</strong>?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+          <button class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade show" (click)="cerrarModal()"></div>
+  </div>
+</div>
+
+<app-footer></app-footer>
